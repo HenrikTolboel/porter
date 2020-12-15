@@ -65,7 +65,7 @@ func (g *DockerfileGenerator) buildDockerfile() ([]string, error) {
 	mixinsTokenIndex := g.getIndexOfPorterMixinsToken(lines)
 	if mixinsTokenIndex == -1 {
 		lines = append(lines, mixinLines...)
-	} else {
+	} else if mixinsTokenIndex > 2 {
 		pretoken := make([]string, mixinsTokenIndex)
 		copy(pretoken, lines)
 		posttoken := lines[mixinsTokenIndex+1:]

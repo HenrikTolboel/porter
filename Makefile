@@ -36,6 +36,10 @@ EXT_MIXINS = helm arm terraform kubernetes
 MIXIN_TAG ?= canary
 MIXINS_URL = https://cdn.porter.sh/mixins
 
+vars:
+	echo "VERSION: $(VERSION)"
+	echo "PERMALINK: $(PERMALINK)"
+
 .PHONY: build
 build: build-porter docs-gen build-mixins clean-packr get-mixins
 
@@ -75,10 +79,13 @@ xbuild-mixins: $(addprefix xbuild-mixin-,$(INT_MIXINS))
 xbuild-mixin-%: generate
 	$(MAKE) $(MAKE_OPTS) xbuild-all MIXIN=$* -f mixin.mk
 
-get-mixins:
+get-mixins: get-mixins-helm3
 	$(foreach MIXIN, $(EXT_MIXINS), \
 		bin/porter mixin install $(MIXIN) --version $(MIXIN_TAG) --url $(MIXINS_URL)/$(MIXIN); \
 	)
+
+get-mixins-helm3:
+	bin/porter mixin install helm3 --feed-url https://mchorfa.github.com/porter-helm3/atom.xml
 
 verify:
 	@echo 'verify does nothing for now but keeping it as a placeholder for a bit'

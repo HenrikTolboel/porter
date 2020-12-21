@@ -22,6 +22,7 @@ $PORTER_HOME/porter mixin install terraform --version $PKG_PERMALINK
 $PORTER_HOME/porter mixin install az --version $PKG_PERMALINK
 $PORTER_HOME/porter mixin install aws --version $PKG_PERMALINK
 $PORTER_HOME/porter mixin install gcloud --version $PKG_PERMALINK
+$PORTER_HOME/porter mixin install helm3 --version $PKG_PERMALINK
 
 $PORTER_HOME/porter plugin install azure --version $PKG_PERMALINK
 

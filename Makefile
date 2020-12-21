@@ -238,3 +238,7 @@ clean-packr: packr2
 	$(foreach MIXIN, $(INT_MIXINS), \
 		`cd pkg/$(MIXIN) && packr2 clean`; \
 	)
+
+
+make docker:
+	docker build -t porter:$(PERMALINK) -f Dockerfile.build.porter .

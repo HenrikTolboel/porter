@@ -7,13 +7,17 @@ RUN make build install
 
 FROM alpine:3.12
 
+RUN apk --no-cache add ca-certificates docker
+
 ENV RUN_USER=1000
 ENV RUN_GROUP=1000
 
+ENV DOCKER_REGISTRY=
+ENV DOCKER_REGISTRY_USER= 
+ENV DOCKER_REGISTRY_PASS=
+
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod 777 /docker-entrypoint.sh
-
-RUN apk --no-cache add ca-certificates
 
 WORKDIR /root
 COPY --from=builder /root/.porter /root/.porter
